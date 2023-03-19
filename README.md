@@ -1,9 +1,12 @@
-# README
+# Texas AirBnbs
 
-This is the [Flask](http://flask.pocoo.org/) [quick start](http://flask.pocoo.org/docs/1.0/quickstart/#a-minimal-application) example for [Render](https://render.com).
+This app creates a map from a dataset of AirBnbs available across Texas.
 
-The app in this repo is deployed at [https://flask.onrender.com](https://flask.onrender.com).
+[https://texas-airbnbs.onrender.com/](https://texas-airbnbs.onrender.com/)
 
-## Deployment
+## The Busy Kids
 
-Follow the guide at https://render.com/docs/deploy-flask.
+The Busy Kids were an all-female punk band from Houston, Texas. No official releases were made and they only had a handful of live shows before breaking up. They were awesome.
+
+[https://thebusykids.bandcamp.com/](https://thebusykids.bandcamp.com/)
+
