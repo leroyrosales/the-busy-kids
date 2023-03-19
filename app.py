@@ -7,6 +7,7 @@ import os
 app = Flask(__name__)
 
 data = pandas.read_csv('Airbnb_Texas_Rentals.csv')
+data.to_parquet("airbnb_tx.parquet", engine="fastparquet", compression=None)
 
 '''
 Columns
