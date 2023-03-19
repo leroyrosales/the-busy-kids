@@ -1,6 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 import folium
+from folium.plugins import MarkerCluster
 import pandas
+import os
 
 app = Flask(__name__)
 
@@ -16,6 +18,7 @@ Columns
 lat = list(data['latitude'])
 long = list(data['longitude'])
 url = list(data['url'])
+average_rate_per_night = list(data['average_rate_per_night'])
 description = list(data['description'])
 
 map = folium.Map(
@@ -25,26 +28,36 @@ map = folium.Map(
 )
 
 html = """
-%s <br/>
-<a href="%s" target="_blank">View this AirBnb</a><br>
+<article style="padding-bottom:1rem;">
+%s
+<strong style="display: block;padding-top: 8px;">%s per night</strong>
+</article>
+<a href="%s" target="_blank">View this AirBnb</a>
 """
 
-fg = folium.FeatureGroup(name="Texas Map")
+# fg = folium.FeatureGroup(name="Texas Map")
+marker_cluster = MarkerCluster().add_to(map)
 
-for lt, ln, url, description in zip(lat, long, url, description):
+for lt, ln, url, average_rate_per_night, description in zip(lat, long, url, average_rate_per_night, description):
+    clean_desc = str(description).replace("\\n", "<br/>")
     iframe = folium.IFrame(html=html % (
-        description, url), width=200, height=100)
-    fg.add_child(folium.Marker(
-        [lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color="green")))
+        clean_desc, average_rate_per_night, url), width=300, height=250)
+    folium.Marker(
+        [lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color="green")).add_to(marker_cluster)
 
-map.add_child(fg)
+# map.add_child(fg)
 
 map.save('templates/index.html')
 
 
-@app.route('/')
+@ app.route('/')
 def index():
     return render_template('index.html')
+
+
+@ app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 if __name__ == '__main__':
