@@ -43,7 +43,7 @@ for lt, ln, url, average_rate_per_night, description in zip(lat, long, url, aver
     iframe = folium.IFrame(html=html % (
         clean_desc, average_rate_per_night, url), width=300, height=250)
     folium.Marker(
-        [lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color="green")).add_to(marker_cluster)
+        [lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color="orange")).add_to(marker_cluster)
 
 # map.add_child(fg)
 
