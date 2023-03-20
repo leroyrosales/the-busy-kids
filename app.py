@@ -7,29 +7,6 @@ import os
 
 app = Flask(__name__)
 
-# data = pandas.read_csv(
-#     'Airbnb_Texas_Rentals.csv',
-#     header=None,
-#     names=[
-#         'average_rate_per_night',
-#         'bedrooms_count',
-#         'city',
-#         'date_of_listing',
-#         'description',
-#         'latitude',
-#         'longitude',
-#         'title',
-#         'url'
-#     ],
-#     usecols=[
-#         'average_rate_per_night',
-#         'description',
-#         'latitude',
-#         'longitude',
-#         'url'
-#     ]
-# )
-
 data = pandas.read_csv(
     'Airbnb_Texas_Rentals.csv',
     # header=None,
