@@ -7,11 +7,40 @@ import os
 
 app = Flask(__name__)
 
-data = pandas.read_csv('Airbnb_Texas_Rentals.csv')
+# data = pandas.read_csv(
+#     'Airbnb_Texas_Rentals.csv',
+#     header=None,
+#     names=[
+#         'average_rate_per_night',
+#         'bedrooms_count',
+#         'city',
+#         'date_of_listing',
+#         'description',
+#         'latitude',
+#         'longitude',
+#         'title',
+#         'url'
+#     ],
+#     usecols=[
+#         'average_rate_per_night',
+#         'description',
+#         'latitude',
+#         'longitude',
+#         'url'
+#     ]
+# )
+
+data = pandas.read_csv(
+    'Airbnb_Texas_Rentals.csv',
+    # header=None,
+    # usecols=[0, 4, 5, 6, 8],
+    nrows=10000
+
+)
 
 '''
 Columns
-'Unnamed: 0', 'average_rate_per_night', 'bedrooms_count', 'city',
+'average_rate_per_night', 'bedrooms_count', 'city',
        'date_of_listing', 'description', 'latitude', 'longitude', 'title',
        'url'
 '''
@@ -36,7 +65,6 @@ html = """
 <a href="%s" target="_blank">View this AirBnb</a>
 """
 
-# fg = folium.FeatureGroup(name="Texas Map")
 marker_cluster = MarkerCluster().add_to(map)
 
 for lt, ln, url, average_rate_per_night, description in zip(lat, long, url, average_rate_per_night, description):
@@ -45,8 +73,6 @@ for lt, ln, url, average_rate_per_night, description in zip(lat, long, url, aver
         clean_desc, average_rate_per_night, url), width=300, height=250)
     folium.Marker(
         [lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color="orange")).add_to(marker_cluster)
-
-# map.add_child(fg)
 
 map.save('templates/index.html')
 
