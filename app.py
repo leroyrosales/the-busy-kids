@@ -34,7 +34,7 @@ data = pandas.read_csv(
     'Airbnb_Texas_Rentals.csv',
     # header=None,
     # usecols=[0, 4, 5, 6, 8],
-    nrows=10000
+    nrows=5000
 
 )
 
